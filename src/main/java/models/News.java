@@ -6,22 +6,33 @@ public class News {
     private int id;
     private String name;
     private String description;
+    private String image;
     private Major major;
     private Date created_at;
 
-    public News(int id, String name, String description, Major major, Date created_at) {
+    public News(int id, String name, String description, String image, Major major, Date created_at) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.major = major;
         this.created_at = created_at;
+        this.image = image;
     }
 
-    public News(int id, String name, String description, Date created_at) {
+    public News(int id, String name, String description, String image, Date created_at) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created_at = created_at;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getId() {

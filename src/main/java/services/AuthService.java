@@ -6,10 +6,6 @@ import java.sql.*;
 
 public class AuthService extends BasicService implements IAuth {
 
-    public AuthService(Connection connection) {
-        super(connection);
-    }
-
     @Override
     public void authenticate(String email, String password) throws Exception {
         String query = "SELECT * FROM student WHERE email = ? AND password = ?";

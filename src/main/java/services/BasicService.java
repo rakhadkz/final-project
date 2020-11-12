@@ -1,5 +1,7 @@
 package services;
 
+import config.Database;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,8 +12,8 @@ public class BasicService {
     PreparedStatement preparedStatement;
     Statement statement;
 
-    public BasicService(Connection connection) {
-        this.connection = connection;
+    public BasicService() {
+        this.connection = Database.getConnection();
     }
 
     public void closeAll() throws SQLException {

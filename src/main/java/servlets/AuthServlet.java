@@ -25,7 +25,7 @@ public class AuthServlet extends HttpServlet {
         String password = request.getParameter("password");
         session = request.getSession();
         Connection connection = Database.getConnection();
-        AuthService authService = new AuthService(connection);
+        AuthService authService = new AuthService();
         if (session.getAttribute("user") != null){
             session.invalidate();
             //TODO Add here Cookie removing functionality

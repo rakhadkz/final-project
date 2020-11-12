@@ -5,14 +5,8 @@ public class Student extends User{
     private Major major;
     private int year;
 
-    public Student(
-            String email,
-            String firstName,
-            String lastName,
-            Group group,
-            Major major,
-            int year) {
-        super(-1, email, firstName, lastName);
+    public Student(int id, String email, String firstName, String lastName, Group group, Major major, int year) {
+        super(id, email, firstName, lastName);
         this.group = group;
         this.major = major;
         this.year = year;

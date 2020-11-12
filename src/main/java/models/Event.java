@@ -8,16 +8,10 @@ public class Event {
     private String description;
     private String image;
     private Date created_at;
+    private Club club;
     private Major major;
-
-    public Event(int id, String name, String description, String image, Date created_at, Major major) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.image = image;
-        this.created_at = created_at;
-        this.major = major;
-    }
+    private int major_id;
+    private int club_id;
 
     public Event(int id, String name, String description, String image, Date created_at) {
         this.id = id;
@@ -25,15 +19,31 @@ public class Event {
         this.description = description;
         this.image = image;
         this.created_at = created_at;
-        this.major = null;
     }
-
-    public Major getMajor() {
-        return major;
-    }
-
-    public void setMajor(Major major) {
+    public Event(int id, String name, String description, String image, Date created_at, Major major, Club club) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.created_at = created_at;
         this.major = major;
+        this.club = club;
+    }
+
+    public int getMajor_id() {
+        return major_id;
+    }
+
+    public void setMajor_id(int major_id) {
+        this.major_id = major_id;
+    }
+
+    public int getClub_id() {
+        return club_id;
+    }
+
+    public void setClub_id(int club_id) {
+        this.club_id = club_id;
     }
 
     public int getId() {
@@ -74,5 +84,21 @@ public class Event {
 
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public void setMajor(Major major) {
+        this.major = major;
+    }
+
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
     }
 }

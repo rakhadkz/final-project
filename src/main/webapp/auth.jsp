@@ -58,7 +58,7 @@
         </div>
         <div class="col card p-5 m-5">
             <form action="auth" method="post">
-                <input type="hidden" name="role" value="admin">
+                <input type="hidden" name="role" value="student">
                 <div class="form-group text-center">
                     <p class="h3">Students</p>
                     <hr>

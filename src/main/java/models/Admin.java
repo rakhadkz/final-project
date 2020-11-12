@@ -1,6 +1,6 @@
 package models;
 
-public class Admin extends api.models.User {
+public class Admin extends User {
 
     public Admin(String email) {
         super(-1, email, "Admin", "User");

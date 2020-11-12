@@ -1,11 +1,8 @@
 package servlets;
 
-import config.Database;
-import enums.Role;
 import models.Admin;
 import models.Student;
 import services.AuthService;
-import services.StudentService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 
 @WebServlet(name = "AuthServlet")
 public class AuthServlet extends HttpServlet {
@@ -24,7 +20,6 @@ public class AuthServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         session = request.getSession();
-        Connection connection = Database.getConnection();
         AuthService authService = new AuthService();
         if (session.getAttribute("user") != null){
             session.invalidate();
@@ -32,22 +27,21 @@ public class AuthServlet extends HttpServlet {
             return;
         }
 
-        if (role.equals(Role.student.toString())){
+        if (role.equals("student")){
             try {
-                authService.authenticate(email, password);
-                StudentService studentService = new StudentService(connection);
-                session.setAttribute("user", studentService.read(email));
-                System.out.println(studentService.read(email).getFirstName());
+                Student student = authService.authenticate(email, password);
+                session.setAttribute("user", student);
+                System.out.println("Successfully logged");
                 //TODO Add some cookies
             } catch (Exception e) {
                 request.setAttribute("student_auth_error", e.getMessage());
             }
 
         }
-        else if (role.equals(Role.admin.toString())){
+        else if (role.equals("admin")){
             try {
-                authService.admin_authenticate(email, password);
-                session.setAttribute("user", new Admin(email));
+                Admin admin = authService.admin_authenticate(email, password);
+                session.setAttribute("user", admin);
                 System.out.println("Successfully!");
                 //TODO Add some cookies
             } catch (Exception e) {
@@ -58,8 +52,10 @@ public class AuthServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("user") != null)
+        if (request.getSession().getAttribute("user") != null) {
+            // If user exists, you can redirect to main page (ex. response.redirect('main');)
             return;
+        }
         request.getRequestDispatcher("./auth.jsp").forward(request, response);
     }
 }

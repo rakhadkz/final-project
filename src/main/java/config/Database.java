@@ -18,6 +18,7 @@ public class Database {
             Context envCtx = (Context)initialContext.lookup("java:comp/env");
             DataSource ds = (DataSource) envCtx.lookup("jdbc/FinalProject");
             connection = ds.getConnection();
+            System.out.println("Connected successfully!");
         }
         catch (NamingException | SQLException e)
         {

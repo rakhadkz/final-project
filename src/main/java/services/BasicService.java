@@ -17,8 +17,6 @@ public class BasicService {
     }
 
     public void closeAll() throws SQLException {
-        this.preparedStatement.close();
-        this.statement.close();
         this.connection.close();
     }
 

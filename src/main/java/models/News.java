@@ -10,6 +10,16 @@ public class News {
     private Major major;
     private Date created_at;
 
+    public News() {
+    }
+
+    public News(String name, String description, String image, Major major) {
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.major = major;
+    }
+
     public News(int id, String name, String description, String image, Major major, Date created_at) {
         this.id = id;
         this.name = name;

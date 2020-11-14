@@ -1,9 +1,12 @@
 package models;
 
-public class Student extends User{
+public class Student extends User {
     private Group group;
     private Major major;
     private int year;
+
+    public Student() {
+    }
 
     public Student(int id, String email, String firstName, String lastName, Group group, Major major, int year) {
         super(id, email, firstName, lastName);

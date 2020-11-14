@@ -9,6 +9,19 @@ public class Club {
     private String image;
     private Date created_at;
 
+    public Club() {
+
+    }
+
+    public Club(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Club(int id) {
+        this.id = id;
+    }
+
     public Club(int id, String name, String description, String image, Date created_at) {
         this.id = id;
         this.name = name;

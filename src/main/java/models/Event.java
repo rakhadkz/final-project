@@ -10,8 +10,9 @@ public class Event {
     private Date created_at;
     private Club club;
     private Major major;
-    private int major_id;
-    private int club_id;
+
+    public Event() {
+    }
 
     public Event(int id, String name, String description, String image, Date created_at) {
         this.id = id;
@@ -28,22 +29,6 @@ public class Event {
         this.created_at = created_at;
         this.major = major;
         this.club = club;
-    }
-
-    public int getMajor_id() {
-        return major_id;
-    }
-
-    public void setMajor_id(int major_id) {
-        this.major_id = major_id;
-    }
-
-    public int getClub_id() {
-        return club_id;
-    }
-
-    public void setClub_id(int club_id) {
-        this.club_id = club_id;
     }
 
     public int getId() {

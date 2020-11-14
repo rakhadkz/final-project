@@ -4,6 +4,13 @@ public class Major {
     private int id;
     private String name;
 
+    public Major() {
+    }
+
+    public Major(int id) {
+        this.id = id;
+    }
+
     public Major(int id, String name) {
         this.id = id;
         this.name = name;

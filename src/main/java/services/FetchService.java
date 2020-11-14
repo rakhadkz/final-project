@@ -70,10 +70,16 @@ public class FetchService extends BasicService implements IFetch {
     public ArrayList<Event> fetchEvents(int major_id, int club_id) throws Exception {
         String query;
         if (major_id == 0 && club_id == 0){
-            query = "select * from event";
+            query = "select *, m.name as major_name, c.name as club_name from event e inner join club c " +
+                    "on e.club_id = c.id " +
+                    "inner join major m " +
+                    "on e.major_id = m.id";
         }else{
-            query = "select * from event where major_id = " + major_id +
-                    " or club_id = " + club_id;
+            query = "select *, m.name as major_name, c.name as club_name from event e inner join club c " +
+                    "on e.club_id = c.id " +
+                    "inner join major m " +
+                    "on e.major_id = m.id " +
+                    "where e.club_id = " + club_id + " or e.major_id = " + major_id;
         }
         ArrayList<Event> list = new ArrayList<>();
         statement = connection.createStatement();
@@ -84,7 +90,9 @@ public class FetchService extends BasicService implements IFetch {
                     resultSet.getString("name"),
                     resultSet.getString("description"),
                     resultSet.getString("image"),
-                    resultSet.getDate("created_at")
+                    resultSet.getDate("created_at"),
+                    new Major(resultSet.getInt("major_id"), resultSet.getString("major_name")),
+                    new Club(resultSet.getInt("club_id"), resultSet.getString("club_name"))
             ));
         closeAll();
         return list;
@@ -94,9 +102,10 @@ public class FetchService extends BasicService implements IFetch {
     public ArrayList<News> fetchNews(int major_id) throws Exception {
         String query;
         if (major_id == 0){
-            query = "select * from news";
+            query = "select *, m.name as major_name from news n inner join major m on n.major_id = m.id";
         }else{
-            query = "select * from news where major_id = " + major_id;
+            query = "select *, m.name as major_name from news n inner join major m " +
+                    "on n.major_id = m.id where n.major_id = " + major_id;
         }
         ArrayList<News> list = new ArrayList<>();
         statement = connection.createStatement();
@@ -107,6 +116,7 @@ public class FetchService extends BasicService implements IFetch {
                     resultSet.getString("name"),
                     resultSet.getString("description"),
                     resultSet.getString("image"),
+                    new Major(resultSet.getInt("major_id"), resultSet.getString("major_name")),
                     resultSet.getDate("created_at")
             ));
         closeAll();
@@ -129,8 +139,8 @@ public class FetchService extends BasicService implements IFetch {
                     resultSet.getString("email"),
                     resultSet.getString("firstName"),
                     resultSet.getString("lastName"),
-                    new Group(resultSet.getString("name")),
-                    new Major(resultSet.getString("major_name")),
+                    new Group(resultSet.getInt("group_id"), resultSet.getString("name")),
+                    new Major(resultSet.getInt("major_id"), resultSet.getString("major_name")),
                     resultSet.getInt("year")
             ));
         closeAll();
